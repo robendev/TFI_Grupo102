@@ -4,10 +4,22 @@
  */
 package models;
 
+import java.time.LocalDate;
 /**
  *
- * @author iRb18
+ * @author Federico
  */
 public class Mascota {
-    
+
+    private Long id;
+    private Boolean eliminado;
+    private String nombre;
+    private String especie;
+    private String raza;
+    private java.time.LocalDate fechaNacimiento;
+    private String duenio;
+    private Microchip microchip;
+
+    public Mascota() {
+    }
 }
