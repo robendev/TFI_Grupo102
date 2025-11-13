@@ -6,13 +6,7 @@ package entities;
 
 import java.time.LocalDate;
 
-/**
- *
- * @author iRb18
- */
-public class Microchip {
-    private Long id;
-    private Boolean eliminado;
+public class Microchip extends Base {
     private String codigo;
     private LocalDate fechaImplantacion;
     private String veterinaria;
@@ -21,28 +15,13 @@ public class Microchip {
     public Microchip() {}
     
     public Microchip(Long id, Boolean eliminado, String codigo, LocalDate fechaImplantacion, String veterinaria, String observaciones) {
-        this.id = id;
-        this.eliminado = eliminado;
+        super(id, eliminado);
         this.codigo = codigo;
         this.fechaImplantacion = fechaImplantacion;
         this.veterinaria = veterinaria;
         this.observaciones = observaciones;
     }
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Boolean getEliminado() {
-        return eliminado;
-    }
-    public void setEliminado(Boolean eliminado) {
-        this.eliminado = eliminado;
-    }
-
+    
     public String getCodigo() {
         return codigo;
     }
@@ -74,8 +53,8 @@ public class Microchip {
     @Override
     public String toString() {
         return "Microchip{" +
-                "id=" + id +
-                ", eliminado=" + eliminado +
+                "id=" + super.getId() +
+                ", eliminado=" + super.getEliminado() +
                 ", codigo='" + codigo + '\'' +
                 ", fechaImplantacion=" + fechaImplantacion +
                 ", veterinaria='" + veterinaria + '\'' +
@@ -83,3 +62,4 @@ public class Microchip {
                 '}';
     }
 }
+
