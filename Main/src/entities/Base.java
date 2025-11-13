@@ -2,16 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package models;
+package entities;
 
 
 // Este atributo Base es para heredar id y eliminados para todas las clases presentes del dominio, que son atributos comunes
 public abstract class Base {
-    private int id; // Identificado unico 
+    private Long id; // Identificado unico 
     private Boolean eliminado; // Marca en nuestra base de datos un elemento fue eliminado
     
     // Se realiza el constructor sobrecargado
-    public Base(int id, Boolean eliminado){
+    public Base(Long id, Boolean eliminado){
         this.id = id;
         this.eliminado = eliminado;
        
@@ -21,11 +21,11 @@ public abstract class Base {
     
     
     // Se hace el getters y setters 
-    public int getId(){
+    public Long getId(){
         return id;
     }
     
-    public void setId (int id){
+    public void setId (Long id){
         this.id = id;
     }
     
