@@ -6,20 +6,14 @@ package entities;
 
 import java.time.LocalDate;
 
-/**
- *
- * @author Federico
- * @editor Victormanuel.bar
- */
-
 public class Mascota extends Base {
-
     private String nombre;
     private String especie;
     private String raza;
     private java.time.LocalDate fechaNacimiento;
     private String duenio;
     private Microchip microchip;
+
     // Se realiza el constructor sobrecargado  
     
     public Mascota (Long id, Boolean eliminado, String nombre, String especie,String raza, LocalDate fechaNacimiento, String duenio, Microchip microchip){
@@ -97,6 +91,5 @@ public class Mascota extends Base {
                ", duenio='" + duenio +'\'' +
                ", microchip=" + (microchip != null ? microchip.getCodigo() : "Sin Chip") + 
                '}';        
-   }
-    
+   }   
 }

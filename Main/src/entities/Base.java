@@ -4,10 +4,6 @@
  */
 package entities;
 
-/**
- *
- * @author Victormanuel.bar
- */
 // Este atributo Base es para heredar id y eliminados para todas las clases presentes del dominio, que son atributos comunes
 public abstract class Base {
     private Long id; // Identificado unico 
@@ -34,13 +30,11 @@ public abstract class Base {
     
     // Confirmación si esta eliminado el dato en la BD
     public Boolean getEliminado(){
+
         return eliminado;
     }
     
     public void setEliminado (Boolean eliminado){
         this.eliminado = eliminado;
    }
-    
 }
-    
-
