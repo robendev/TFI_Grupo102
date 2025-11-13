@@ -3,10 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package entities;
-/**
- *
- * @author iRb18
- */
+
 import java.time.LocalDate;
 
 public class Microchip extends Base {
@@ -66,3 +63,4 @@ public class Microchip extends Base {
                 '}';
     }
 }
+
