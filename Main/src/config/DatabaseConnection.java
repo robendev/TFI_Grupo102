@@ -38,6 +38,4 @@ public class DatabaseConnection {
             throw new RuntimeException("Error cargando propiedades de BD", ex);
         }
     }
-        /**
-        * Cierra la conexion dada.
-        */
+}
