@@ -22,8 +22,8 @@ public class Mascota extends Base {
     private Microchip microchip;
     // Se realiza el constructor sobrecargado  
     
-    public Mascota (Long id, Boolean eliminado, String nombre, String especie,String raza, LocalDate fechaNacimiento, String duenio, Microchip microchip){
-        super(id, eliminado);
+    public Mascota (Long id, String nombre, String especie,String raza, LocalDate fechaNacimiento, String duenio, Microchip microchip){
+        super(id, false);
         this.nombre = nombre;
         this.especie = especie;
         this.raza = raza;
