@@ -9,6 +9,7 @@ import java.time.LocalDate;
 /**
  *
  * @author Federico
+ * @editor Victormanuel.bar
  */
 
 public class Mascota extends Base {
