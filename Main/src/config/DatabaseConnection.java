@@ -38,15 +38,6 @@ public class DatabaseConnection {
             throw new RuntimeException("Error cargando propiedades de BD", ex);
         }
     }
-}/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author iRb18
- */
-public class DatabaseConnection {
-    
-}
+        /**
+        * Cierra la conexion dada.
+        */
