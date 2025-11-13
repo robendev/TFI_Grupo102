@@ -89,7 +89,7 @@ public class Mascota extends Base {
    public String toString(){
        return "Mascota{" +
                "id=" + super.getId() + 
-               ", eliminado'" + super.getEliminado() + 
+               ", eliminado=" + super.getEliminado() + 
                ", nombre='" + nombre + '\'' + 
                ", especie='" + especie + '\'' +
                ", raza='" + raza + '\'' + 
