@@ -1,43 +1,75 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
-import java.io.InputStream;
-import java.io.IOException;
 
-public class DatabaseConnection {
 
-    private static final String PROPERTIES_FILE = "db.properties";
+public final class DatabaseConnection {
 
-    // Metodo estatico que devuelve una nueva conexion
-    public static Connection getConnection() throws SQLException {
+    /** URL de conexión a la base de datos */
+    private static final String URL = System.getProperty(
+            "db.url",
+            "jdbc:mysql://localhost:3306/dbtpi3?useSSL=false&serverTimezone=America/Argentina/Buenos_Aires"
+    );
+
+    /** Usuario de la base de datos */
+    private static final String USER = System.getProperty("db.user", "root");
+
+    /** Contraseña del usuario */
+    private static final String PASSWORD = System.getProperty("db.password", "");
+
+    
+    static {
         try {
-            Properties prop = new Properties();
+            // Cargar driver JDBC (necesario en algunas versiones de Java)
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Carga el archivo de configuración desde resources/
-            InputStream input = DatabaseConnection.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE);
-            if (input == null) {
-                throw new RuntimeException("No se encontró el archivo " + PROPERTIES_FILE);
-            }
+            // Validar configuración
+            validateConfiguration();
 
-            prop.load(input);
-
-            String url = prop.getProperty("db.url");
-            String user = prop.getProperty("db.user");
-            String pass = prop.getProperty("db.password");
-
-            return DriverManager.getConnection(url, user, pass);
-
-        } catch (IOException ex) {
-            throw new RuntimeException("Error cargando propiedades de BD", ex);
+        } catch (ClassNotFoundException e) {
+            throw new ExceptionInInitializerError(
+                    "No se encontró el driver JDBC de MySQL: " + e.getMessage()
+            );
+        } catch (IllegalStateException e) {
+            throw new ExceptionInInitializerError(
+                    "Error en configuración de la base de datos: " + e.getMessage()
+            );
         }
     }
-        /**
-        * Cierra la conexion dada.
-        */
+
+    /**
+     * Constructor privado para evitar instanciación.
+     * Esta clase solo expone métodos estáticos.
+     */
+    private DatabaseConnection() {
+        throw new UnsupportedOperationException("Esta es una clase utilitaria; no debe instanciarse.");
+    }
+
+    /**
+     * Obtiene una conexión JDBC a la base de datos.
+     * @return Conexión JDBC activa
+     * @throws SQLException si no se puede establecer conexión
+     */
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+
+    /**
+     * Valida la configuración cargada. Se ejecuta una sola vez.
+     *
+     * @throws IllegalStateException si algún parámetro es inválido
+     */
+    private static void validateConfiguration() {
+        if (URL == null || URL.trim().isEmpty()) {
+            throw new IllegalStateException("La URL de conexión está vacía o no configurada");
+        }
+        if (USER == null || USER.trim().isEmpty()) {
+            throw new IllegalStateException("El usuario de la base de datos no está configurado");
+        }
+        if (PASSWORD == null) {
+            throw new IllegalStateException("La contraseña de la base de datos no puede ser null");
+        }
+    }
+}
