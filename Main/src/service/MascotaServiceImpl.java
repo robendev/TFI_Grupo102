@@ -90,9 +90,7 @@ public class MascotaServiceImpl implements GenericService<Mascota> {
         mascotaDao.eliminar(id);
     }
 
-    // --------------------------
     // VALIDACIONES DE NEGOCIO
-    // --------------------------
 
     private void validateMascota(Mascota m) {
         if (m == null)
