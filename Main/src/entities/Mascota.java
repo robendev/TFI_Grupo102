@@ -14,13 +14,10 @@ public class Mascota extends Base {
     private String duenio;
     private Microchip microchip;
 
-    public Mascota() {
-    }
-
     // Se realiza el constructor sobrecargado  
     
-    public Mascota (Long id, Boolean eliminado, String nombre, String especie,String raza, LocalDate fechaNacimiento, String duenio, Microchip microchip){
-        super(id, eliminado);
+    public Mascota (Long id, String nombre, String especie,String raza, LocalDate fechaNacimiento, String duenio, Microchip microchip){
+        super(id, false);
         this.nombre = nombre;
         this.especie = especie;
         this.raza = raza;
@@ -29,6 +26,10 @@ public class Mascota extends Base {
         this.microchip = microchip;
     
     }
+    
+     public Mascota() {
+         super();
+      }
     // Sealizan todos los getters y setters de todos los atributos
     
     public String getNombre() {
@@ -83,7 +84,7 @@ public class Mascota extends Base {
    public String toString(){
        return "Mascota{" +
                "id=" + super.getId() + 
-               ", eliminado'" + super.getEliminado() + 
+               ", eliminado=" + super.getEliminado() + 
                ", nombre='" + nombre + '\'' + 
                ", especie='" + especie + '\'' +
                ", raza='" + raza + '\'' + 
