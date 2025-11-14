@@ -1,0 +1,40 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>390</x><y>30</y><w>210</w><h>240</h></coordinates><panel_attributes>entitites Microchip
+--
+- id: Long
+- eliminado:boolean
+- codigo: String
+- fechaImplantacion: LocalDate
+- veterinaria: String
+- observaciones: String
+--
+
++ toSting() : String
+
++getters/setters
+
++constructors()
+
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>20</y><w>210</w><h>270</h></coordinates><panel_attributes>entitites Mascotas
+--
+- id: Long
+- eliminado: boolean
+- nombre: String
+- raza: String
+- fechaNacimiento: LocalDate
+- especie: String
+- duenio: String
+- microchip: Microchip
+
+--
++ toSting() : String
+
++getters/setters
+
++constructors()
+
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>260</x><y>90</y><w>150</w><h>50</h></coordinates><panel_attributes>lt=&lt;-
+Tiene
+m1=1
+</panel_attributes><additional_attributes>130;20;10;20</additional_attributes></element></diagram>

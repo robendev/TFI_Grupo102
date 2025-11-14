@@ -11,16 +11,17 @@ public class Microchip extends Base {
     private LocalDate fechaImplantacion;
     private String veterinaria;
     private String observaciones;
-
-    public Microchip() {}
     
-    public Microchip(Long id, Boolean eliminado, String codigo, LocalDate fechaImplantacion, String veterinaria, String observaciones) {
-        super(id, eliminado);
+    public Microchip(Long id, String codigo, LocalDate fechaImplantacion, String veterinaria, String observaciones) {
+        super(id, false);
         this.codigo = codigo;
         this.fechaImplantacion = fechaImplantacion;
         this.veterinaria = veterinaria;
         this.observaciones = observaciones;
     }
+     public Microchip() {
+         super();
+      }
     
     public String getCodigo() {
         return codigo;
