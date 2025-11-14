@@ -9,14 +9,16 @@ import java.util.List;
 
 /**
  * Servicio de negocio para Mascota.
- * Basado en UML y en la arquitectura PersonaServiceImpl/DomicilioServiceImpl.
  *
- * Reglas:
- * - Nombre, especie y dueño son obligatorios
- * - Microchip opcional
- * - Relación 1:1 con Microchip
- * - Si el microchip es nuevo, se crea primero
- * - Si existe, se actualiza antes de actualizar la mascota
+ * Reglas de negocio derivadas del UML y TFI:
+ * - Mascota puede tener 0..1 Microchip
+ * - Si trae un microchip nuevo (id = 0) → se crea primero
+ * - Si trae uno existente → se actualiza antes de actualizar la mascota
+ * - Eliminación lógica
+ * - Validaciones de nombre, especie y dueño
+ *
+ * No se utilizan transacciones manuales porque los DAOs
+ * manejan su propia conexión, igual que PersonaServiceImpl.
  */
 public class MascotaServiceImpl implements GenericService<Mascota> {
 
@@ -39,21 +41,28 @@ public class MascotaServiceImpl implements GenericService<Mascota> {
 
         Microchip chip = mascota.getMicrochip();
 
-        // Regla: Microchip primero
+        //  Microchip primero (si existe)
         if (chip != null) {
             if (chip.getId() == 0) {
-                microchipDao.crear(chip);
+                // Insertar microchip asociado a la mascota
+                microchipDao.crear(chip, null);  // mascota aún no tiene ID
             } else {
                 microchipDao.actualizar(chip);
             }
         }
 
+        // Crear mascota
         mascotaDao.crear(mascota);
+
+        // Si el microchip es nuevo, actualizar mascota con FK correcta
+        if (chip != null && chip.getId() != 0) {
+            mascotaDao.actualizar(mascota);
+        }
     }
 
     @Override
     public Mascota leer(int id) throws Exception {
-        if (id <= 0) throw new IllegalArgumentException("ID debe ser mayor a 0");
+        if (id <= 0) throw new IllegalArgumentException("El ID debe ser mayor a 0");
         return mascotaDao.leer(id);
     }
 
@@ -71,40 +80,42 @@ public class MascotaServiceImpl implements GenericService<Mascota> {
 
         Microchip chip = mascota.getMicrochip();
 
+        // Microchip primero
         if (chip != null) {
             if (chip.getId() == 0) {
-                microchipDao.crear(chip);
+                
+                microchipDao.crear(chip, mascota.getId());
             } else {
                 microchipDao.actualizar(chip);
             }
         }
 
+        // Actualizar mascota
         mascotaDao.actualizar(mascota);
     }
 
     @Override
     public void eliminar(int id) throws Exception {
         if (id <= 0)
-            throw new IllegalArgumentException("ID debe ser mayor a 0");
+            throw new IllegalArgumentException("El ID debe ser mayor a 0");
 
         mascotaDao.eliminar(id);
     }
 
-    // --------------------------
+
     // VALIDACIONES DE NEGOCIO
-    // --------------------------
 
     private void validateMascota(Mascota m) {
         if (m == null)
             throw new IllegalArgumentException("La mascota no puede ser null");
 
         if (m.getNombre() == null || m.getNombre().trim().isEmpty())
-            throw new IllegalArgumentException("El nombre de la mascota es obligatorio");
+            throw new IllegalArgumentException("El nombre es obligatorio");
 
         if (m.getEspecie() == null || m.getEspecie().trim().isEmpty())
-            throw new IllegalArgumentException("La especie de la mascota es obligatoria");
+            throw new IllegalArgumentException("La especie es obligatoria");
 
         if (m.getDuenio() == null || m.getDuenio().trim().isEmpty())
-            throw new IllegalArgumentException("El dueño de la mascota es obligatorio");
+            throw new IllegalArgumentException("El dueño es obligatorio");
     }
 }

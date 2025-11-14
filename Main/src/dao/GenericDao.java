@@ -6,16 +6,16 @@ package dao;
 
 import java.util.List;
 
-/**
- *
- * @author iRb18
- */
 public interface GenericDao<T> {
+
     void crear(T entidad) throws Exception;
+
     T leer(int id) throws Exception;
+
     List<T> leerTodos() throws Exception;
+
     void actualizar(T entidad) throws Exception;
-    void eliminar(int id_dom) throws Exception;
-    
-    // void recuperar(int id) throws Exception;
+
+    void eliminar(int id) throws Exception;   // ID genérico
+
 }

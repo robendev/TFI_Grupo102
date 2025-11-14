@@ -5,14 +5,7 @@ import entities.Microchip;
 import java.util.List;
 
 /**
- * Servicio de negocio para Microchip.
- * Basado en UML y en la arquitectura de PersonaServiceImpl/DomicilioServiceImpl.
- *
- * Reglas:
- * - Código obligatorio
- * - Código único
- * - Eliminación lógica
- * - Un microchip pertenece a una sola mascota (1:1)
+ * Un microchip pertenece a una sola mascota (1:1)
  */
 public class MicrochipServiceImpl implements GenericService<Microchip> {
 
