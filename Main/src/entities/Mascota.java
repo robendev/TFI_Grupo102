@@ -55,17 +55,17 @@ public class Mascota extends Base {
     public void setRaza(String raza){
         this.raza = raza;
     }      
-    
-     public java.time.LocalDate getFechaNacimiento() {
-     return fechaNacimiento;
+
+    public java.time.LocalDate getFechaNacimiento() {
+    return fechaNacimiento;
     }
     
     public void setFechaNacimiento (java.time.LocalDate fechaNacimiento){
         this.fechaNacimiento = fechaNacimiento;
     }   
-  
-    public String getDuenio() {
-     return duenio;
+
+public String getDuenio() {
+    return duenio;
     }
     
     public void setDuenio(String duenio){
@@ -80,16 +80,16 @@ public class Mascota extends Base {
         this.microchip = microchip;
     }
     
-   @Override
-   public String toString(){
-       return "Mascota{" +
-               "id=" + super.getId() + 
-               ", eliminado=" + super.getEliminado() + 
-               ", nombre='" + nombre + '\'' + 
-               ", especie='" + especie + '\'' +
-               ", raza='" + raza + '\'' + 
-               ", duenio='" + duenio +'\'' +
-               ", microchip=" + (microchip != null ? microchip.getCodigo() : "Sin Chip") + 
-               '}';        
-   }   
+@Override
+public String toString(){
+    return "Mascota{" +
+            "id=" + super.getId() + 
+            ", eliminado=" + super.getEliminado() + 
+            ", nombre='" + nombre + '\'' + 
+            ", especie='" + especie + '\'' +
+            ", raza='" + raza + '\'' + 
+            ", duenio='" + duenio +'\'' +
+            ", microchip=" + (microchip != null ? microchip.getCodigo() : "Sin Chip") + 
+            '}';        
+}   
 }
