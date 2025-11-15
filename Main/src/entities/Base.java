@@ -7,7 +7,14 @@ package entities;
 // Este atributo Base es para heredar id y eliminados para todas las clases presentes del dominio, que son atributos comunes
 public abstract class Base {
     private Long id; // Identificado unico 
-    private Boolean eliminado = false; // Marca en nuestra base de datos un elemento fue eliminado
+    private Boolean eliminado; // Marca en nuestra base de datos un elemento fue eliminado
+    
+    // Se realiza el constructor sobrecargado
+    public Base(Long id, Boolean eliminado){
+        this.id = id;
+        this.eliminado = eliminado;
+       
+    }
     
     public Base (){}  // constructor vacio
     
@@ -23,6 +30,7 @@ public abstract class Base {
     
     // Confirmación si esta eliminado el dato en la BD
     public Boolean getEliminado(){
+
         return eliminado;
     }
     

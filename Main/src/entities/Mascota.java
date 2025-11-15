@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package entities;
 
 import java.time.LocalDate;
@@ -14,24 +11,26 @@ public class Mascota extends Base {
     private String duenio;
     private Microchip microchip;
 
-    public Mascota() {
-        super();
-    }
-    
     // Se realiza el constructor sobrecargado  
-    public Mascota (String nombre, String especie,String raza, LocalDate fechaNacimiento, String duenio, Microchip microchip){
-        super();
+    
+    public Mascota (Long id, String nombre, String especie,String raza, LocalDate fechaNacimiento, String duenio, Microchip microchip){
+        super(id, false);
         this.nombre = nombre;
         this.especie = especie;
         this.raza = raza;
         this. fechaNacimiento = fechaNacimiento; 
         this.duenio = duenio;
         this.microchip = microchip;
+    
     }
     
+     public Mascota() {
+         super();
+      }
     // Sealizan todos los getters y setters de todos los atributos
+    
     public String getNombre() {
-        return nombre;
+     return nombre;
     }
     
     public void setNombre(String nombre){
@@ -39,7 +38,7 @@ public class Mascota extends Base {
     }
     
     public String getEspecie() {
-        return especie;
+     return especie;
     }
     
     public void setEspecie(String especie){
@@ -47,23 +46,23 @@ public class Mascota extends Base {
     }    
     
     public String getRaza() {
-        return raza;
+     return raza;
     }
     
     public void setRaza(String raza){
         this.raza = raza;
     }      
-    
-     public java.time.LocalDate getFechaNacimiento() {
-         return fechaNacimiento;
+
+    public java.time.LocalDate getFechaNacimiento() {
+    return fechaNacimiento;
     }
     
     public void setFechaNacimiento (java.time.LocalDate fechaNacimiento){
         this.fechaNacimiento = fechaNacimiento;
     }   
-  
-    public String getDuenio() {
-        return duenio;
+
+public String getDuenio() {
+    return duenio;
     }
     
     public void setDuenio(String duenio){
@@ -78,16 +77,16 @@ public class Mascota extends Base {
         this.microchip = microchip;
     }
     
-   @Override
-   public String toString(){
-       return "Mascota{" +
-               "id=" + super.getId() + 
-               ", eliminado=" + super.getEliminado() + 
-               ", nombre='" + nombre + '\'' + 
-               ", especie='" + especie + '\'' +
-               ", raza='" + raza + '\'' + 
-               ", duenio='" + duenio +'\'' +
-               ", microchip=" + (microchip != null ? microchip.getCodigo() : "Sin Chip") + 
-               '}';        
-   }   
+@Override
+public String toString(){
+    return "Mascota{" +
+            "id=" + super.getId() + 
+            ", eliminado=" + super.getEliminado() + 
+            ", nombre='" + nombre + '\'' + 
+            ", especie='" + especie + '\'' +
+            ", raza='" + raza + '\'' + 
+            ", duenio='" + duenio +'\'' +
+            ", microchip=" + (microchip != null ? microchip.getCodigo() : "Sin Chip") + 
+            '}';        
+}   
 }

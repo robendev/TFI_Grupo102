@@ -11,20 +11,20 @@ public class Microchip extends Base {
     private LocalDate fechaImplantacion;
     private String veterinaria;
     private String observaciones;
-    private Long mascotaId;
+    private Long mascotaId; // Esto es solo un dato no unidirecionalidad
     
-    public Microchip() {
-         super();
-      }
     
-    public Microchip(String codigo, LocalDate fechaImplantacion, String veterinaria, String observaciones) {
-        super();
+    public Microchip(Long id, String codigo, LocalDate fechaImplantacion, String veterinaria, String observaciones) {
+        super(id, false);
         this.codigo = codigo;
         this.fechaImplantacion = fechaImplantacion;
         this.veterinaria = veterinaria;
         this.observaciones = observaciones;
     }
-     
+     public Microchip() {
+         super();
+      }
+    
     public String getCodigo() {
         return codigo;
     }
@@ -53,11 +53,13 @@ public class Microchip extends Base {
         this.observaciones = observaciones;
     }
     
-     public Long getMascotaId() {
-        return mascotaId;
+    public Long getMascotaId(){
+     return mascotaId;
     }
-    public void setMascotaId(Long mascotaId) {
+    
+    public void setMascotaId (Long mascotaId){
         this.mascotaId = mascotaId;
+        
     }
 
     @Override
@@ -69,8 +71,9 @@ public class Microchip extends Base {
                 ", fechaImplantacion=" + fechaImplantacion +
                 ", veterinaria='" + veterinaria + '\'' +
                 ", observaciones='" + observaciones + '\'' +
-                ", mascotaId='" + mascotaId + '\'' +
-                '}';
+                ", mascotaId=" + mascotaId + 
+           '}';
+              
     }
 }
 
