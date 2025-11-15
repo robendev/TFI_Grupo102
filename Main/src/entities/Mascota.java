@@ -14,26 +14,24 @@ public class Mascota extends Base {
     private String duenio;
     private Microchip microchip;
 
-    // Se realiza el constructor sobrecargado  
+    public Mascota() {
+        super();
+    }
     
-    public Mascota (Long id, String nombre, String especie,String raza, LocalDate fechaNacimiento, String duenio, Microchip microchip){
-        super(id, false);
+    // Se realiza el constructor sobrecargado  
+    public Mascota (String nombre, String especie,String raza, LocalDate fechaNacimiento, String duenio, Microchip microchip){
+        super();
         this.nombre = nombre;
         this.especie = especie;
         this.raza = raza;
         this. fechaNacimiento = fechaNacimiento; 
         this.duenio = duenio;
         this.microchip = microchip;
-    
     }
     
-     public Mascota() {
-         super();
-      }
     // Sealizan todos los getters y setters de todos los atributos
-    
     public String getNombre() {
-     return nombre;
+        return nombre;
     }
     
     public void setNombre(String nombre){
@@ -41,7 +39,7 @@ public class Mascota extends Base {
     }
     
     public String getEspecie() {
-     return especie;
+        return especie;
     }
     
     public void setEspecie(String especie){
@@ -49,7 +47,7 @@ public class Mascota extends Base {
     }    
     
     public String getRaza() {
-     return raza;
+        return raza;
     }
     
     public void setRaza(String raza){
@@ -57,7 +55,7 @@ public class Mascota extends Base {
     }      
     
      public java.time.LocalDate getFechaNacimiento() {
-     return fechaNacimiento;
+         return fechaNacimiento;
     }
     
     public void setFechaNacimiento (java.time.LocalDate fechaNacimiento){
@@ -65,7 +63,7 @@ public class Mascota extends Base {
     }   
   
     public String getDuenio() {
-     return duenio;
+        return duenio;
     }
     
     public void setDuenio(String duenio){

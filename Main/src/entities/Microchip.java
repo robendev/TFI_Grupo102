@@ -11,18 +11,20 @@ public class Microchip extends Base {
     private LocalDate fechaImplantacion;
     private String veterinaria;
     private String observaciones;
+    private Long mascotaId;
     
-    public Microchip(Long id, String codigo, LocalDate fechaImplantacion, String veterinaria, String observaciones) {
-        super(id, false);
+    public Microchip() {
+         super();
+      }
+    
+    public Microchip(String codigo, LocalDate fechaImplantacion, String veterinaria, String observaciones) {
+        super();
         this.codigo = codigo;
         this.fechaImplantacion = fechaImplantacion;
         this.veterinaria = veterinaria;
         this.observaciones = observaciones;
     }
-     public Microchip() {
-         super();
-      }
-    
+     
     public String getCodigo() {
         return codigo;
     }
@@ -50,6 +52,13 @@ public class Microchip extends Base {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
+    
+     public Long getMascotaId() {
+        return mascotaId;
+    }
+    public void setMascotaId(Long mascotaId) {
+        this.mascotaId = mascotaId;
+    }
 
     @Override
     public String toString() {
@@ -60,6 +69,7 @@ public class Microchip extends Base {
                 ", fechaImplantacion=" + fechaImplantacion +
                 ", veterinaria='" + veterinaria + '\'' +
                 ", observaciones='" + observaciones + '\'' +
+                ", mascotaId='" + mascotaId + '\'' +
                 '}';
     }
 }
