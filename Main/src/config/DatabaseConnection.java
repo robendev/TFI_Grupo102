@@ -10,7 +10,7 @@ public final class DatabaseConnection {
     /** URL de conexión a la base de datos */
     private static final String URL = System.getProperty(
             "db.url",
-            "jdbc:mysql://localhost:3306/dbtpi3?useSSL=false&serverTimezone=America/Argentina/Buenos_Aires"
+            "jdbc:mysql://localhost:3306/tfi_mascotas?useSSL=false&serverTimezone=America/Argentina/Buenos_Aires"
     );
 
     /** Usuario de la base de datos */
