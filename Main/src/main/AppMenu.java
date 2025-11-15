@@ -1,53 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package main;
 
 import dao.MascotaDao;
-import java.util.Scanner;
-import entities.Base;
-import entities.Mascota;
-
-import service.MascotaService;
-import service.MicrochipService;
-import dao.MascotaDao;
 import dao.MicrochipDao;
+import service.MascotaServiceImpl;
+import service.MicrochipServiceImpl;
 
 import java.util.Scanner;
-import java.util.List;
 
-
-/**
- *
- * @author iRb18
- */
 public class AppMenu {
 
+    private final Scanner scanner;
+    private final MascotaServiceImpl mascotaService;
+    private final MicrochipServiceImpl microchipService;
+    private final MenuHandler handler;
 
-        
-public class AppMenu {
-     public static void main(String[] args) {
-         Scanner sc = new Scanner(System.in);
-         
-         MascotaService mascotaService = new MascotaService(new MascotaDao());
-        // MicrochipService microchipService = new MicrochipService(new MicrochipDao(),mascota);
-          int opcion = -1;
-          do {
-              try {
-                  menu();
-                  opcion = Integer.parseInt(sc.nextLine());
-                  
-                  switch(opcion){
-                      case 1 -> {
-                          try {
-                              Mascota mascota = new Mascota();
-                              System.out.print( "")
-                          }
-                      }
-              }
-          }
-     }
-}
+    public AppMenu() {
+        this.scanner = new Scanner(System.in);
 
+        MascotaDao mascotaDao = new MascotaDao();
+        MicrochipDao microchipDao = new MicrochipDao();
+
+        this.microchipService = new MicrochipServiceImpl(microchipDao);
+        this.mascotaService = new MascotaServiceImpl(mascotaDao, microchipDao);
+
+        this.handler = new MenuHandler(scanner, mascotaService, microchipService);
+    }
+
+    public void run() {
+        int opcion;
+        do {
+            MenuDisplay.mostrarMenuPrincipal();
+            opcion = MenuDisplay.leerEntero(scanner, "Ingrese una opción: ");
+            switch (opcion) {
+                case 1 -> handler.menuMascotas();
+                // más adelante podemos usar opción 2 para Microchips
+                case 0 -> System.out.println("Saliendo de la aplicación...");
+                default -> System.out.println("Opción inválida.");
+            }
+        } while (opcion != 0);
+    }
 }
