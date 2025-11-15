@@ -9,6 +9,7 @@ import entities.Microchip;
 import java.util.List;
 
 /**
+<<<<<<< HEAD
  * Implementación del servicio de negocio para la entidad Microchip.
  * 
  * Capa intermedia entre la UI y el DAO que aplica validaciones de negocio.
@@ -19,6 +20,9 @@ import java.util.List;
  * - Delegar operaciones de BD al DAO
  *
  * Patrón: Service Layer con inyección de dependencias
+=======
+ * Un microchip pertenece a una sola mascota (1:1)
+>>>>>>> b1e43cd37acb78c22eb6775a6170cde46915353f
  */
 public class MicrochipServiceImpl implements GenericService<Microchip> {
 

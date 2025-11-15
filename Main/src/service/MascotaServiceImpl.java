@@ -7,6 +7,7 @@ import entities.Microchip;
 import java.util.List;
 
 /**
+<<<<<<< HEAD
  * Implementación del servicio de negocio para la entidad Mascota.
  * Capa intermedia entre la UI y el DAO que aplica validaciones de negocio.
  *
@@ -16,6 +17,19 @@ import java.util.List;
  * - Delegar operaciones de BD al DAO de Mascota
  *
  * Patrón: Service Layer con inyección de dependencias
+=======
+ * Servicio de negocio para Mascota.
+ *
+ * Reglas de negocio derivadas del UML y TFI:
+ * - Mascota puede tener 0..1 Microchip
+ * - Si trae un microchip nuevo (id = 0) → se crea primero
+ * - Si trae uno existente → se actualiza antes de actualizar la mascota
+ * - Eliminación lógica
+ * - Validaciones de nombre, especie y dueño
+ *
+ * No se utilizan transacciones manuales porque los DAOs
+ * manejan su propia conexión, igual que PersonaServiceImpl.
+>>>>>>> b1e43cd37acb78c22eb6775a6170cde46915353f
  */
 public class MascotaServiceImpl implements GenericService<Mascota> {
 
@@ -68,19 +82,35 @@ public class MascotaServiceImpl implements GenericService<Mascota> {
         validateMascota(mascota);
 
         Microchip chip = mascota.getMicrochip();
+<<<<<<< HEAD
         if (chip != null) {
             if (chip.getId() == 0) {
                 // Microchip nuevo: insertar
                 microchipService.insertar(chip);
+=======
+
+        //  Microchip primero (si existe)
+        if (chip != null) {
+            if (chip.getId() == 0) {
+                // Insertar microchip asociado a la mascota
+                microchipDao.crear(chip, null);  // mascota aún no tiene ID
+>>>>>>> b1e43cd37acb78c22eb6775a6170cde46915353f
             } else {
                 // Microchip existente: actualizar
                 microchipService.actualizar(chip);
             }
         }
 
+        // Crear mascota
         mascotaDao.crear(mascota);
+
+        // Si el microchip es nuevo, actualizar mascota con FK correcta
+        if (chip != null && chip.getId() != 0) {
+            mascotaDao.actualizar(mascota);
+        }
     }
 
+<<<<<<< HEAD
     /**
      * Actualiza una mascota existente en la base de datos.
      *
@@ -94,6 +124,19 @@ public class MascotaServiceImpl implements GenericService<Mascota> {
      * @param mascota Mascota con datos actualizados
      * @throws Exception Si la validación falla o la mascota no existe
      */
+=======
+    @Override
+    public Mascota leer(int id) throws Exception {
+        if (id <= 0) throw new IllegalArgumentException("El ID debe ser mayor a 0");
+        return mascotaDao.leer(id);
+    }
+
+    @Override
+    public List<Mascota> leerTodos() throws Exception {
+        return mascotaDao.leerTodos();
+    }
+
+>>>>>>> b1e43cd37acb78c22eb6775a6170cde46915353f
     @Override
     public void actualizar(Mascota mascota) throws Exception {
         validateMascota(mascota);
@@ -103,14 +146,24 @@ public class MascotaServiceImpl implements GenericService<Mascota> {
         }
 
         Microchip chip = mascota.getMicrochip();
+<<<<<<< HEAD
         if (chip != null) {
             if (chip.getId() == 0) {
                 microchipService.insertar(chip);
+=======
+
+        // Microchip primero
+        if (chip != null) {
+            if (chip.getId() == 0) {
+                
+                microchipDao.crear(chip, mascota.getId());
+>>>>>>> b1e43cd37acb78c22eb6775a6170cde46915353f
             } else {
                 microchipService.actualizar(chip);
             }
         }
 
+        // Actualizar mascota
         mascotaDao.actualizar(mascota);
     }
 
@@ -122,6 +175,7 @@ public class MascotaServiceImpl implements GenericService<Mascota> {
      */
     @Override
     public void eliminar(int id) throws Exception {
+<<<<<<< HEAD
         if (id <= 0) {
             throw new IllegalArgumentException("El ID debe ser mayor a 0");
         }
@@ -180,5 +234,25 @@ public class MascotaServiceImpl implements GenericService<Mascota> {
         if (mascota.getDuenio() == null || mascota.getDuenio().trim().isEmpty()) {
             throw new IllegalArgumentException("El dueño de la mascota no puede estar vacío");
         }
+=======
+        if (id <= 0)
+            throw new IllegalArgumentException("El ID debe ser mayor a 0");
+
+        mascotaDao.eliminar(id);
+    }
+
+     private void validateMascota(Mascota m) {
+        if (m == null)
+            throw new IllegalArgumentException("La mascota no puede ser null");
+
+        if (m.getNombre() == null || m.getNombre().trim().isEmpty())
+            throw new IllegalArgumentException("El nombre es obligatorio");
+
+        if (m.getEspecie() == null || m.getEspecie().trim().isEmpty())
+            throw new IllegalArgumentException("La especie es obligatoria");
+
+        if (m.getDuenio() == null || m.getDuenio().trim().isEmpty())
+            throw new IllegalArgumentException("El dueño es obligatorio");
+>>>>>>> b1e43cd37acb78c22eb6775a6170cde46915353f
     }
 }

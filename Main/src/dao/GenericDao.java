@@ -6,10 +6,6 @@ package dao;
 
 import java.util.List;
 
-/**
- *
- * @author iRb18
- */
 public interface GenericDao<T> {
     void crear(T entidad) throws Exception;
     T leer(Long id) throws Exception;

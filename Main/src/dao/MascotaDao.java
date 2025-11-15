@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import java.sql.*;
@@ -57,10 +53,10 @@ public class MascotaDao implements GenericDao<Mascota>{
         Mascota mascota = null;
         
         try (Connection conn = DatabaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID)) {
-            
-            stmt.setLong(1, id);
-            
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID)) {
+
+            stmt.setInt(1, id);
+
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     mapMascota(rs);
@@ -97,7 +93,7 @@ public class MascotaDao implements GenericDao<Mascota>{
     }
 
     @Override
-    public void actualizar(Mascota entidad) throws Exception {
+    public void actualizar(Mascota m) throws Exception {
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(UPDATE_SQL)) {
             
