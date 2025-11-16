@@ -175,4 +175,19 @@ public class MicrochipDao implements GenericDao<Microchip> {
        
         return m;
     }
+    
+    public Microchip buscarPorCodigo(String codigo) throws Exception {
+    String SQL = "SELECT * FROM microchip WHERE codigo = ? AND eliminado = 0";
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(SQL)) {
+        
+        stmt.setString(1, codigo);
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return mapMicrochip(rs); // Reutilizamos el map
+            }
+        }
+    }
+    return null;
+}
 }
