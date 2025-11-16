@@ -87,7 +87,25 @@ El proyecto está configurado por defecto para conectarse con las siguientes cre
 
  * Contraseña: `""`(vacía)
 
-Si tus credenciales de MySQL son diferentes, puedes modificarlas directamente en el archivo `config/DatabaseConnection.java`
+Si tus credenciales de MySQL son diferentes, debes cambiarlas para que la aplicación pueda conectarse, puedes modificarlas directamente en el archivo `config/DatabaseConnection.java`:
+
+ 1. En tu IDE, abre el archivo: src/main/java/config/DatabaseConnection.java
+
+ 2. Busca estas dos líneas (cerca de la línea 18):
+    
+```bash    
+private static final String USER = System.getProperty("db.user", "root");
+private static final String PASSWORD = System.getProperty("db.password", "");
+```
+ 3. Cambia los valores `"root"` y `""` por tu usuario y contraseña, depende del caso.
+ 
+   Ejemplo si tu usuario es admin y tu contraseña es 1234:
+
+```bash 
+private static final String USER = System.getProperty("db.user", "admin");
+private static final String PASSWORD = System.getProperty("db.password", "1234");
+```
+4.  Guarda el archivo y ejecuta el proyecto.
 
 ### 5. Compilar y Ejecutar
  
@@ -101,15 +119,15 @@ Si tus credenciales de MySQL son diferentes, puedes modificarlas directamente en
 
 El proyecto sigue una arquitectura de 3 capas bien definida para separar responsabilidades:
 
-  * **config** : Contiene DatabaseConnection.java (conexión) y TransactionManager.java (manejo de commit/rollback).
+  * **config** : Contiene `DatabaseConnection.java` (conexión) y `TransactionManager.java` (manejo de `commit`/`rollback`).
 
-  * **entities** : Clases de dominio (POJOs) Base, Mascota y Microchip.
+  * **entities** : Clases de dominio (POJOs) `Base`, `Mascota` y `Microchip`.
 
-  * **dao** : Patrón Data Access Object (MascotaDao, MicrochipDao) que implementan GenericDao y manejan todo el SQL.
+  * **dao** : Patrón Data Access Object (`MascotaDao`, `MicrochipDao`) que implementan `GenericDao` y manejan todo el SQL.
 
-  * **service** : Lógica de negocio y orquestación de transacciones (MascotaServiceImpl, MicrochipServiceImpl).
+  * **service** : Lógica de negocio y orquestación de transacciones (`MascotaServiceImpl`, `MicrochipServiceImpl`).
 
-  * **main** : Capa de Vista (consola) que incluye Main (arranque), AppMenu (inyección de dependencias) y MenuHandler (controlador).
+  * **main** : Capa de Vista (consola) que incluye `Main` (arranque), `AppMenu` (inyección de dependencias) y `MenuHandler` (controlador).
 
 ## 🎥 Video de Demostración
 [Enlace al video - PENDIENTE DE SUBIR]
