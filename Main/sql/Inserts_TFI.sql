@@ -1,6 +1,6 @@
 USE tfi_mascotas;
 
-INSERT INTO mascota (NOMBRE, ESPECIE, RAZA, FECHA_NACIMIENTO, DUENIO) VALUES
+INSERT INTO mascota (NOMBRE, ESPECIE, RAZA, fechaNacimiento, DUENIO) VALUES
 ('Fido', 'Perro', 'Labrador Retriever', '2020-05-15', 'Ana López'),
 ('Michi', 'Gato', 'Siamés', '2021-01-20', 'Juan Pérez'),
 ('Coco', 'Perro', 'Bulldog Francés', '2019-11-01', 'María García'),
@@ -12,7 +12,7 @@ INSERT INTO mascota (NOMBRE, ESPECIE, RAZA, FECHA_NACIMIENTO, DUENIO) VALUES
 ('Toby', 'Perro', 'Beagle', '2022-02-14', 'Elena Ruíz'),
 ('Nemo', 'Pez', 'Pez Payaso', '2023-01-01', 'Ricardo Gómez');
 
-INSERT INTO microchip (CODIGO, FECHA_IMPLANTACION, VETERINARIA, OBSERVACIONES, mascota_id) VALUES
+INSERT INTO microchip (CODIGO, fechaImplantacion, VETERINARIA, OBSERVACIONES, mascota_id) VALUES
 ('CHIP-A1B2C3D4E5F6', '2021-01-10', 'Veterinaria Central', 'Registro inicial de vacunación.', 1),
 ('CHIP-G7H8I9J0K1L2', '2022-05-20', 'Clínica Patitas Felices', 'Implantado durante esterilización.', 2),
 ('CHIP-M3N4O5P6Q7R8', '2020-03-01', 'Hospital Animal Sur', 'Control de displasia de cadera.', 3),
