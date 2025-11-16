@@ -5,8 +5,14 @@ import entities.Microchip;
 import java.util.List;
 
 /**
- * Un microchip pertenece a una sola mascota (1:1)
+ * Servicio de negocio para Microchip.
+ * En la arquitectura A->B, este servicio NO DEBE manejar
+ * la creación o eliminación de chips, ya que eso se
+ * orquesta desde MascotaServiceImpl.
+ *
+ * Este servicio solo se usa para LECTURAS específicas de Microchip.
  */
+
 public class MicrochipServiceImpl implements GenericService<Microchip> {
 
     private final MicrochipDao microchipDao;
@@ -17,64 +23,62 @@ public class MicrochipServiceImpl implements GenericService<Microchip> {
         }
         this.microchipDao = microchipDao;
     }
-
+    // --- MÉTODOS CUD (Crear, Actualizar, Eliminar) ---
+    // Estos métodos NO tienen sentido aquí. La lógica de negocio
+    // dicta que un Chip solo se crea/actualiza/elimina
+    // JUNTO con su Mascota, a través de MascotaServiceImpl.
+    
     @Override
     public void crear(Microchip chip) throws Exception {
-        validateMicrochip(chip);
-        validateCodigoUnico(chip.getCodigo(), null);
-        microchipDao.crear(chip);
+        throw new UnsupportedOperationException(
+            "Error: Un Microchip no se puede crear solo. Use MascotaService.crear(mascota)."
+        );
     }
 
     @Override
-    public Microchip leer(int id) throws Exception {
-        if (id <= 0) throw new IllegalArgumentException("ID debe ser mayor a 0");
+    public void actualizar(Microchip chip) throws Exception {
+        throw new UnsupportedOperationException(
+            "Error: Un Microchip se actualiza via MascotaService.actualizar(mascota)."
+        );
+    }
+    
+    @Override
+    public void eliminar(Long id) throws Exception { // <-- CORREGIDO A Long
+        throw new UnsupportedOperationException(
+            "Error: Un Microchip se elimina via MascotaService.eliminar(mascotaId)."
+        );
+    }
+    
+    // --- MÉTODOS DE LECTURA ---
+    
+    @Override
+    public Microchip leer(Long id) throws Exception { 
+        if (id == null || id <= 0) throw new IllegalArgumentException("ID debe ser válido");
         return microchipDao.leer(id);
     }
-
+    
     @Override
     public List<Microchip> leerTodos() throws Exception {
         return microchipDao.leerTodos();
     }
 
-    @Override
-    public void actualizar(Microchip chip) throws Exception {
-        validateMicrochip(chip);
-
-        if (chip.getId() <= 0)
-            throw new IllegalArgumentException("El ID debe ser mayor a 0 para actualizar");
-
-        validateCodigoUnico(chip.getCodigo(), chip.getId());
-
-        microchipDao.actualizar(chip);
-    }
-
-    @Override
-    public void eliminar(int id) throws Exception {
-        if (id <= 0) throw new IllegalArgumentException("ID debe ser mayor a 0");
-        microchipDao.eliminar(id);
-    }
-
-    // ------------------------------
+    
     // VALIDACIONES DE NEGOCIO
-    // ------------------------------
 
-    private void validateMicrochip(Microchip chip) {
-        if (chip == null)
-            throw new IllegalArgumentException("El microchip no puede ser null");
-
-        if (chip.getCodigo() == null || chip.getCodigo().trim().isEmpty())
-            throw new IllegalArgumentException("El código del microchip es obligatorio");
-    }
-
-    private void validateCodigoUnico(String codigo, Integer chipId) throws Exception {
-        List<Microchip> chips = microchipDao.leerTodos();
-
-        for (Microchip c : chips) {
-            if (c.getCodigo().equalsIgnoreCase(codigo)) {
-                if (chipId == null || !c.getId().equals(chipId)) {
-                    throw new IllegalArgumentException("El código de microchip ya existe: " + codigo);
-                }
+   public void validateCodigoUnico(String codigo, Long chipId) throws Exception {
+        
+        // ¡Validación eficiente! Usamos el nuevo método del DAO.
+        Microchip chipExistente = microchipDao.buscarPorCodigo(codigo);
+        
+        if (chipExistente != null) {
+            // Si el chipId es null (estamos creando) O
+            // si el ID encontrado es diferente al que estamos actualizando...
+            // ¡entonces es un duplicado!
+            if (chipId == null || !chipExistente.getId().equals(chipId)) {
+                throw new IllegalArgumentException(
+                    "El código de microchip ya existe: " + codigo
+                );
             }
         }
-    }
+    } 
 }
