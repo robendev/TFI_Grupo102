@@ -13,7 +13,7 @@ public class MenuDisplay {
         System.out.println("0) Salir");
         System.out.println("------------------------------");
     }
-
+    // Mostras Menu de Mascotas
     public static void mostrarMenuMascotas() {
         System.out.println("\n-------- MENÚ MASCOTAS --------");
         System.out.println("1) Alta de Mascota (con Microchip)"); // Aclaramos
@@ -28,6 +28,15 @@ public class MenuDisplay {
         System.out.println("-------------------------------");
         System.out.println("0) Volver al menú principal");
         System.out.println("-------------------------------");
+    }
+    // Mostras Menu de Microchips (solo lectura) 
+    public static void mostrarMenuMicrochips() {
+        System.out.println("\n----- MENÚ MICROCHIPS (Lectura) -----");
+        System.out.println("1) Listar Todos los Microchips");
+        System.out.println("2) Buscar Microchip por ID");
+        System.out.println("-----------------------------------");
+        System.out.println("0) Volver al menú principal");
+        System.out.println("-----------------------------------");
     }
 
     /**

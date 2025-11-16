@@ -259,4 +259,65 @@ public class MenuHandler {
         }
         MenuDisplay.pausar(scanner);
     }
+    // --- MENÚ MICROCHIPS ---
+
+    public void menuMicrochips() {
+        int opcion;
+         do {
+            MenuDisplay.mostrarMenuMicrochips(); // Llama a la nueva pantalla
+            opcion = MenuDisplay.leerEntero(scanner, "Ingrese una opción: ");
+            switch (opcion) {
+                case 1 -> listarMicrochips();
+                case 2 -> buscarMicrochipPorId();
+                case 0 -> { /* volver */ }
+                default -> System.out.println("Opción inválida.");
+            }
+        } while (opcion != 0);
+    }
+
+    /**
+     * Llama al servicio para listar todos los microchips.
+     */
+    private void listarMicrochips() {
+        try {
+            System.out.println("\n--- Listado de Microchips ---");
+            // 1. Llama al servicio (¡ya existe!)
+            List<Microchip> lista = microchipService.leerTodos(); 
+
+            if (lista == null || lista.isEmpty()) {
+                System.out.println("No hay microchips registrados.");
+            } else {
+                for (Microchip chip : lista) {
+                    // 2. Imprime el toString() de Microchip (¡ya existe!)
+                    System.out.println(chip); 
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error al listar microchips: " + e.getMessage());
+        }
+        MenuDisplay.pausar(scanner);
+    }
+
+    /**
+     * Llama al servicio para buscar un microchip por su ID.
+     */
+    private void buscarMicrochipPorId() {
+        try {
+            // 1. Pide un Long (¡ya existe!)
+            long id = MenuDisplay.leerLong(scanner, "Ingrese ID del microchip: ");
+
+            // 2. Llama al servicio (¡ya existe!)
+            Microchip chip = microchipService.leer(id); 
+
+            if (chip == null) {
+                System.out.println("No se encontró un microchip con ID " + id);
+            } else {
+                System.out.println("Microchip encontrado:");
+                System.out.println(chip);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al buscar microchip: " + e.getMessage());
+        }
+        MenuDisplay.pausar(scanner);
+    }
 }

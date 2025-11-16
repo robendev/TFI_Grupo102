@@ -33,7 +33,7 @@ public class AppMenu {
             opcion = MenuDisplay.leerEntero(scanner, "Ingrese una opción: ");
             switch (opcion) {
                 case 1 -> handler.menuMascotas();
-                // más adelante podemos usar opción 2 para Microchips
+                case 2 -> handler.menuMicrochips();
                 case 0 -> System.out.println("Saliendo de la aplicación...");
                 default -> System.out.println("Opción inválida.");
             }
