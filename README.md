@@ -110,3 +110,6 @@ El proyecto sigue una arquitectura de 3 capas bien definida para separar respons
   * **service** : Lógica de negocio y orquestación de transacciones (MascotaServiceImpl, MicrochipServiceImpl).
 
   * **main** : Capa de Vista (consola) que incluye Main (arranque), AppMenu (inyección de dependencias) y MenuHandler (controlador).
+
+## 🎥 Video de Demostración
+[Enlace al video - PENDIENTE DE SUBIR]
