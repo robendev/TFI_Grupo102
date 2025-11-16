@@ -4,10 +4,23 @@
  */
 package main;
 
-/**
- *
- * @author iRb18
- */
+import config.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 public class TestConexion {
-    
+
+    public static void main(String[] args) {
+        System.out.println("Probando conexión a la base de datos...");
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            if (conn != null && !conn.isClosed()) {
+                System.out.println("Conexión establecida correctamente.");
+            } else {
+                System.out.println("La conexión no pudo ser establecida.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al intentar conectar: " + e.getMessage());
+        }
+    }
 }

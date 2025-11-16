@@ -215,6 +215,7 @@ public class MascotaServiceImpl implements GenericService<Mascota> {
         } finally {
             if (txManager != null) txManager.close();
         }
+       
     
     }
 
@@ -230,6 +231,29 @@ public class MascotaServiceImpl implements GenericService<Mascota> {
 
         if (m.getDuenio() == null || m.getDuenio().trim().isEmpty())
             throw new IllegalArgumentException("El dueño es obligatorio");
+    }
+     
+     // --- MÉTODOS DE BÚSQUEDA ADICIONALES ---
+
+    /**
+     * Busca mascotas por nombre (coincidencia parcial).
+     */
+    public List<Mascota> buscarPorNombre(String nombre) throws Exception {
+        return mascotaDao.buscarPorNombre(nombre);
+    }
+
+    /**
+     * Busca mascotas por dueño (coincidencia parcial).
+     */
+    public List<Mascota> buscarPorDuenio(String duenio) throws Exception {
+        return mascotaDao.buscarPorDuenio(duenio);
+    }
+
+    /**
+     * Busca una mascota por el código de su microchip.
+     */
+    public Mascota buscarPorCodigoMicrochip(String codigo) throws Exception {
+        return mascotaDao.buscarPorCodigoMicrochip(codigo);
     }
 }
 
