@@ -76,7 +76,8 @@ public class MenuHandler {
                 String codigo = scanner.nextLine().trim();
                 try {
                     // Usamos el validador del MicrochipService
-                    microchipService.validateCodigoUnico(codigo, null);
+                   // microchipService.validateCodigoUnico(codigo, null);
+                   // Error transaccional con evidencia de un fallo simulado  
                     chip.setCodigo(codigo); // Si no lanza excepción, el código es válido
                     break; 
                 } catch (Exception e) {
