@@ -130,4 +130,4 @@ El proyecto sigue una arquitectura de 3 capas bien definida para separar respons
   * **main** : Capa de Vista (consola) que incluye `Main` (arranque), `AppMenu` (inyección de dependencias) y `MenuHandler` (controlador).
 
 ## 🎥 Video de Demostración
-[Enlace al video - PENDIENTE DE SUBIR]
+[Enlace al video - https://drive.google.com/drive/folders/10IuNAQCH9KiPlmTPsaA_8kYKDAay_dC7?usp=sharing]
