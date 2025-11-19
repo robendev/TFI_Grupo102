@@ -6,8 +6,8 @@ Este es el Trabajo Final Integrador para la materia Programación II de la Tecni
 
 * **Barroeta Victor** – Comisión: 2 – DNI: 95805903: Tester QA y Entities
 * **Barrutia Milagro** – Comisión:10 – DNI: 38603968: Base de datos y App Menú
-* **Batista Federico** – Comisión:10 – DNI: 38019234: DAO y Entities
-* **Benitez Rodrigo** – Comisión:10 – DNI: 38778097: Services y Configuración
+* **Batista Federico** – Comisión:10 – DNI: 38019234:  Services y Configuración 
+* **Benitez Rodrigo** – Comisión:10 – DNI: 38778097:DAO y Entities
 
 ---
 
